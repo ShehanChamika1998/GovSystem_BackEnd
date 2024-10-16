@@ -14,7 +14,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
+    <ProjectReference Include="..\GovSystem.Business\GovSystem.Business.csproj" />
+    <ProjectReference Include="..\GovSystem.DataAccess\GovSystem.DataAccess.csproj" />
   </ItemGroup>
 
 </Project>
