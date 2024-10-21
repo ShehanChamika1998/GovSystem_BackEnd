@@ -6,8 +6,4 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\GovSystem.Common\GovSystem.Common.csproj" />
-  </ItemGroup>
-
 </Project>

@@ -1,25 +1,17 @@
 ﻿using Dapper;
-using GovSystem.Business.Data;
 using GovSystem.Business.Entities;
-using GovSystem.Business.Interfaces;
+using GovSystem.Business.Repository.Users;
 using GovSystem.DataAccess.Common;
-using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
-namespace GovSystem.DataAccess.Data
+namespace GovSystem.DataAccess.Data.Users
 {
-    public class DInitializer : IDInitializer
+    public class UserRepository : IUserRepository
     {
 
         private readonly DapperContext _context;
 
-        public DInitializer(DapperContext context)
+        public UserRepository(DapperContext context)
         {
             _context = context;
         }
@@ -27,7 +19,7 @@ namespace GovSystem.DataAccess.Data
         public async Task<dynamic> CreateUser(User user)
         {
 
-            
+
             try
 
             {
@@ -44,15 +36,8 @@ namespace GovSystem.DataAccess.Data
                 parameters.Add("CreateUser", user.CreateUser);
                 using (var connection = _context.CreateConnection())
                 {
-
-
                     var data = await connection.QueryAsync<dynamic>(query, parameters, commandType: CommandType.StoredProcedure);
-                    
-
                     return data;
-
-
-                    ///return returnValue; // This will return null if no matching user is found
                 }
             }
             catch (Exception ex)
@@ -62,6 +47,30 @@ namespace GovSystem.DataAccess.Data
 
         }
 
+        public async Task<dynamic> LoginUser(string userName, string password)
+        {
+            try
+
+            {
+                var query = "[Gov].[SP_Login_Details]";
+                var parameters = new DynamicParameters();
+                parameters.Add("UserName", userName);
+                parameters.Add("Password", password);
+
+                using (var connection = _context.CreateConnection())
+                {
+                    var data = await connection.ExecuteScalarAsync<int>(query, parameters, commandType: CommandType.StoredProcedure);
+                    return data;
+                }
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
+        }
+
+        //Methods
+        #region Methods
         public async Task<string> GetUserIdAsync(string UserId)
         {
 
@@ -87,41 +96,14 @@ namespace GovSystem.DataAccess.Data
                 }
                 else
                 {
-                    // In case there are no records, return the default UserId
                     UserId = "USR-00001";
                 }
 
-                return UserId;  // Return the newly generated or default UserId
+                return UserId;  
             }
         }
 
-        public async Task<dynamic> LoginUser(string userName, string password)
-        {
-            try
 
-            {
-                var query = "[Gov].[SP_Login_Details]";
-                var parameters = new DynamicParameters();
-                parameters.Add("UserName", userName);
-                parameters.Add("Password", password);
-
-                using (var connection = _context.CreateConnection())
-                {
-
-
-                    var data = await connection.ExecuteScalarAsync<int>(query, parameters, commandType: CommandType.StoredProcedure);
-
-
-                    return data;
-
-
-                    ///return returnValue; // This will return null if no matching user is found
-                }
-            }
-            catch (Exception ex)
-            {
-                return ex.Message;
-            }
-        }
+        #endregion
     }
 }

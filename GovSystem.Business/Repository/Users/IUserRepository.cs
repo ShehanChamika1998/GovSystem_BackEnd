@@ -5,11 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GovSystem.Business.Interfaces
+namespace GovSystem.Business.Repository.Users
 {
-    public interface IUser
+    public interface IUserRepository
     {
-        Task <dynamic> CreateUser(User user);
+        Task<dynamic> CreateUser(User user);
         Task<dynamic> LoginUser(string userName, string password);
     }
 }

@@ -1,5 +1,5 @@
 ﻿using GovSystem.Business.Entities;
-using GovSystem.Business.Interfaces;
+using GovSystem.Business.Services.Users;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -11,8 +11,8 @@ namespace GovSystem.API.Controllers
     public class UsersController : ControllerBase
     {
 
-        private readonly IUser _user;
-        public UsersController(IUser user)
+        private readonly IUserService _user;
+        public UsersController(IUserService user)
         {
             _user = user;
         }

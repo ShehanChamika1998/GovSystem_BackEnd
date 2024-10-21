@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GovSystem.Business.Dto
+namespace GovSystem.Common.Dto
 {
     public class UserCreationDto
     {

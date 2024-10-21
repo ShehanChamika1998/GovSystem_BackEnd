@@ -6,7 +6,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GovSystem.Business.Methods
+namespace GovSystem.Common.Methods
 {
     public static class Common
     {
