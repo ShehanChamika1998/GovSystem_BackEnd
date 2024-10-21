@@ -10,5 +10,6 @@ namespace GovSystem.Business.Data
     public interface IDInitializer
     {
         Task<dynamic> CreateUser(User user);
+        Task<dynamic> LoginUser(string userName, string password);
     }
 }

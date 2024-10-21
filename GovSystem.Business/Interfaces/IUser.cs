@@ -10,5 +10,6 @@ namespace GovSystem.Business.Interfaces
     public interface IUser
     {
         Task <dynamic> CreateUser(User user);
+        Task<dynamic> LoginUser(string userName, string password);
     }
 }
