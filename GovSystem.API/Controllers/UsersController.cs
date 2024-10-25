@@ -1,5 +1,6 @@
 ﻿using GovSystem.Business.Entities;
 using GovSystem.Business.Services.Users;
+using GovSystem.Common.Dto;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -31,13 +32,12 @@ namespace GovSystem.API.Controllers
         }
 
         [HttpPost("User_Login")]
-        public async Task<IActionResult> LoginUser(string userName, string password)
+        public async Task<dynamic> LoginUser([FromBody] UserLoginDto req)
         {
-            var data = await _user.LoginUser(userName,password);
-
-            if (data == 2)
+            var data = await _user.LoginUser(req);
+            if (data.RetValue == 2)
             {
-                return Unauthorized(new { message = "Invalid Credentials" });
+               return Unauthorized(new { message = "Invalid Credentials" });
             }
             return Ok(data);
         }

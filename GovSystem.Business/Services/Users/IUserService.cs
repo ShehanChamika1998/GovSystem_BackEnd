@@ -1,4 +1,5 @@
 ﻿using GovSystem.Business.Entities;
+using GovSystem.Common.Dto;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,6 @@ namespace GovSystem.Business.Services.Users
     public interface IUserService
     {
         Task<dynamic> CreateUser(User user);
-        Task<dynamic> LoginUser(string userName, string password);
+        Task<dynamic> LoginUser(UserLoginDto loginDto);
     }
 }

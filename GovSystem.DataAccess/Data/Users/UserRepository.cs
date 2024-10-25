@@ -59,7 +59,7 @@ namespace GovSystem.DataAccess.Data.Users
 
                 using (var connection = _context.CreateConnection())
                 {
-                    var data = await connection.ExecuteScalarAsync<int>(query, parameters, commandType: CommandType.StoredProcedure);
+                    var data = await connection.QueryFirstOrDefaultAsync<dynamic>(query, parameters, commandType: CommandType.StoredProcedure);
                     return data;
                 }
             }
