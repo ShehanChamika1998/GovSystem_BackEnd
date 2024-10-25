@@ -1,5 +1,6 @@
 ﻿using GovSystem.Business.Entities;
 using GovSystem.Business.Repository.Users;
+using GovSystem.Common.Dto;
 using GovSystem.Common.Methods;
 
 namespace GovSystem.Business.Services.Users
@@ -19,10 +20,10 @@ namespace GovSystem.Business.Services.Users
             return res;
         }
 
-        public async Task<dynamic> LoginUser(string userName, string password)
+        public async Task<dynamic> LoginUser(UserLoginDto loginDto)
         {
-            string Pw = Common.Methods.Common.Encrypt(password);
-            var res = await _iDInitializer.LoginUser(userName, Pw);
+            string Pw = Common.Methods.Common.Encrypt(loginDto.Password);
+            var res = await _iDInitializer.LoginUser(loginDto.UserName, Pw);
             return res;
         }
     }
